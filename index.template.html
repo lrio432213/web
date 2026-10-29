@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#161512">
+  <meta name="description" content="云间 Cloudroom — 一间城市高空的复式小屋。昼夜、薄雾，与属于你的漫游时刻。">
+  <title>云间 CLOUDROOM · 城市上空的家</title>
+  <style>/*__STYLE__*/</style>
+</head>
+<body>
+  <main id="experience" aria-label="云间复式小屋三维场景"><canvas id="scene" aria-label="可交互的三维复式小屋"></canvas></main>
+  <div id="loading"><div class="loading-mark">云间<span>CLOUDROOM</span></div><p id="load-status">正在点亮一间小屋</p><div class="load-line"><i></i></div></div>
+  <div class="ui" id="ui">
+    <header class="masthead"><div class="brand"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M3 27V10l13-6 13 6v17H3Zm13-23v23M3 16h26M21 16v11"/></svg><div><h1>云间</h1><span>CLOUDROOM</span></div></div><div class="edition">A HOME ABOVE THE CITY<span>一间小屋，一整座城市。</span></div></header>
+    <div class="utilities"><button id="atmosphere-btn" title="氛围设置" aria-label="展开氛围设置" aria-expanded="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="help-btn" title="操作说明" aria-label="操作说明">?</button><button id="sound-btn" title="环境声音" aria-label="开启环境声音" aria-pressed="false"><svg viewBox="0 0 24 24"><path d="M4 10v4h4l5 4V6l-5 4H4Zm13-2c3 2 3 6 0 8M19 5c5 4 5 10 0 14"/></svg></button><button id="capture-btn" title="保存此刻" aria-label="保存画面"><svg viewBox="0 0 24 24"><path d="M3 7h5l2-3h4l2 3h5v13H3V7Z"/><circle cx="12" cy="13" r="4"/></svg></button><button id="fullscreen-btn" title="全屏" aria-label="切换全屏"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button></div>
+    <aside class="atmosphere" aria-label="氛围设置"><div class="section-caption">此刻的氛围 <span id="clock-label">19:20</span></div><div class="segmented" id="time-controls"><button data-time="day" aria-pressed="false"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>白昼</button><button data-time="night" class="active" aria-pressed="true"><svg viewBox="0 0 24 24"><path d="M20 15A9 9 0 0 1 9 4a9 9 0 1 0 11 11Z"/></svg>夜幕</button></div><button class="toggle-row" id="fog-btn" aria-pressed="false"><span>城市薄雾</span><span class="switch"><i></i></span></button><button class="toggle-row" id="tour-btn" aria-pressed="false"><span>镜头漫游</span><span class="play-symbol">▷</span></button><div class="quality-row"><label for="quality">画质</label><select id="quality"><option value="high">精致</option><option value="ultra">极致</option><option value="low">流畅</option></select></div></aside>
+    <nav class="places" aria-label="观景位置"><button class="selected" data-view="living"><span>01</span>客厅</button><button data-view="window"><span>02</span>窗边</button><button data-view="bedroom"><span>03</span>卧室</button><button data-view="overview"><span>04</span>全景</button></nav>
+    <div class="story"><p class="eyebrow" id="scene-label">蓝调时刻 / BLUE HOUR</p><h2>城市很远，家很近。</h2><p class="story-note">把日常，安放在天际线之上。</p></div>
+    <footer class="bottom-bar"><div class="location"><span class="status-dot"></span><span id="floor-label">客厅 · 一层</span><span class="divider">/</span><span>云间 2801</span></div><div class="view-modes" aria-label="视角模式"><button data-mode="orbit" class="active" aria-pressed="true">自由观景</button><button data-mode="first" aria-pressed="false">第一人称</button><button data-mode="third" aria-pressed="false">第三人称</button></div><button id="hide-btn" class="hide-control">沉浸模式 <kbd>H</kbd></button></footer>
+    <div class="hint" id="hint">拖动环顾 · 滚轮靠近 <span>选择第一 / 第三人称，即可步行参观</span></div>
+  </div>
+  <div id="crosshair" aria-hidden="true"></div><button id="restore-btn" hidden>显示界面 · H</button>
+  <div id="walk-prompt" hidden><span>W A S D 移动 · 鼠标环顾 · Shift 慢跑 · Esc 释放鼠标</span><button id="lock-btn">点击开始漫游</button></div>
+  <div id="touch-controls" hidden><div class="touch-pad"><button data-key="KeyW" aria-label="向前">↑</button><button data-key="KeyA" aria-label="向左">←</button><button data-key="KeyS" aria-label="向后">↓</button><button data-key="KeyD" aria-label="向右">→</button></div></div>
+  <dialog id="help"><button class="close-dialog" aria-label="关闭">×</button><p class="eyebrow">MAKE YOURSELF AT HOME</p><h2>欢迎回家。</h2><p>一间可以走进去的高层复式小屋。放慢一点，看看窗外。</p><dl><dt>自由观景</dt><dd>鼠标拖动旋转，滚轮缩放，右键拖动平移。</dd><dt>步行参观</dt><dd>第一或第三人称下，用 W A S D / 方向键移动，鼠标转向。按 Shift 慢跑；沿后方木楼梯可上二楼。</dd><dt>触屏</dt><dd>观景时单指旋转、双指缩放；步行时左下方向键移动，拖动画面转向。</dd><dt>快捷键</dt><dd>1 / 2 / 3 切换视角，N 昼夜，F 薄雾，H 隐藏界面，Esc 退出鼠标锁定。</dd><dt>保存此刻</dt><dd>右上角相机可下载无界面的 PNG 画面。整个场景无需联网。</dd></dl><button id="help-done" class="primary">开始感受</button></dialog>
+  <div id="toast" role="status"></div>
+  <script>/*__SCRIPT__*/</script>
+</body></html>
